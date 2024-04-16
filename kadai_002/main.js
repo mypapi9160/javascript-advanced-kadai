@@ -100,7 +100,14 @@ const rankCheck = score => {
 //ゲームを終了
 const gameOver = id => {
   clearInterval(id);
-  const result = confirm(rankCheck(score));
+  //タイマーが0になったら「タイムアップ！」と表示する
+  untypedfield.style.display = 'none';
+  typedfield.textContent = 'タイムアップ!';
+
+  //「タイムアップ！」が表示された10ミリ後に結果を表示する
+  setTimeout(() => {
+    const result = confirm(rankCheck(score));
+    }, 10);
 
   //OKボタンをクリックしたらリロードする
   if(result == true){
@@ -139,11 +146,6 @@ start.addEventListener('click',() =>{
 
   //キーボードのイベント処理
   document.addEventListener('keypress',keyPress);
-
-  //スタートを押して60秒後に「タイムアップ」を表示する
-  setTimeout(() => {
-    untypedfield.textContent = 'タイムアウト!';
-  }, 60000);
 
 });
 
